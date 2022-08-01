@@ -3,6 +3,8 @@ import 'package:weather/app/utils/globals.dart';
 import 'package:weather/app/widgets/search.dart';
 import 'package:weather/themes.dart';
 
+import '../widgets/card_weather.dart';
+
 /**This basically the weather page, 
 where you search for different places 
 and the page rebuilds with weather details for new search */
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.topRight,
                     child: IconButton(
                       onPressed: () {
-                        debugPrint("hellp");
+                        debugPrint("hell0");
                         currentTheme.toggleTheme();
                       }, 
                       icon: const Icon(Icons.dark_mode_outlined, size: 40.0,)
@@ -62,35 +64,39 @@ class _HomePageState extends State<HomePage> {
                     ),
                     // Text("Lagos, Nigeria", style: textTheme.headline5)
                   ),
-                ),
-                // Image.asset("assets/images/cloudy 2.png", height: size.height * 0.5, width: size.width * 6.0,),
-                Image.asset("assets/images/bird.png", height: size.height * 0.2, width: size.width * 3.0,),
+                ),                
                 Padding(
-                  padding:  EdgeInsets.only(bottom: baseSize * 4),
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '24',
-                          style: textTheme.headline2),
-                        WidgetSpan(
-                          child: Transform.translate(
-                            offset: const Offset(-2, -12),
-                            child: Text(
-                              'o',
-                              //superscript is usually smaller in size
-                              textScaleFactor: 3.0,
-                              style: textTheme.caption,
-                            ),
+                  padding: EdgeInsets.only(top: baseSize/2),
+                  child: Image.asset("assets/images/5-1.png", height: size.height * 0.3, width: size.width * 8.0,),
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '24',
+                        style: textTheme.headline2),
+                      WidgetSpan(
+                        child: Transform.translate(
+                          offset: const Offset(-2, -12),
+                          child: Text(
+                            'o',
+                            //superscript is usually smaller in size
+                            textScaleFactor: 3.0,
+                            style: textTheme.caption,
                           ),
                         ),
-                        TextSpan(
-                          text: 'c',
-                          style: textTheme.headline3),
-                      ]
-                    ),
+                      ),
+                      TextSpan(
+                        text: 'c',
+                        style: textTheme.headline3),
+                    ]
                   ),
-                )
+                ),
+                Text("Thunderstorm", style: textTheme.caption!.copyWith(fontSize: 12.0)),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: baseSize, horizontal: baseSize),
+                  child: const MyCardDisplay(),
+                ),
               ]
             ),
           ),
