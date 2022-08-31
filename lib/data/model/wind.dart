@@ -2,9 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'wind.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Wind {
-  final int? speed ;
+  final double? speed ;
   final int? degree ;
   
 

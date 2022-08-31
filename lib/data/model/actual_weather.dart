@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather/data/model/current_weather.dart';
+import 'package:weather/app/enums.dart';
 
 part 'actual_weather.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ActualWeather {
-  final int? id ;
-  final String? main ;
+  final int? id;
+  final String? main;
   final String? description;
   
 

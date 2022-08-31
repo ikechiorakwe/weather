@@ -8,7 +8,9 @@ class ForecastService {
   ForecastService(this.weatherApi);
 
   Future<Forecast> getWeather(String city) async {
-    final location = await weatherApi.getLocation(city);
-    return await weatherApi.getWeather(location);
+    // final location = await weatherApi.getLocation(city);
+    // print("loc:${location.toJson()}");
+    // return await weatherApi.getWeather(location);
+    return await weatherApi.getWeather(city);
   }
 }

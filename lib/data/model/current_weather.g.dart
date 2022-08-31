@@ -8,10 +8,10 @@ part of 'current_weather.dart';
 
 CurrentWeather _$CurrentWeatherFromJson(Map<String, dynamic> json) =>
     CurrentWeather(
-      temp: json['temp'] as int?,
-      feels_like: json['feels_like'] as int?,
-      temp_max: json['temp_max'] as int?,
-      temp_min: json['temp_min'] as int?,
+      temp: (json['temp'] as num?)?.toDouble(),
+      feels_like: (json['feels_like'] as num?)?.toDouble(),
+      temp_max: (json['temp_max'] as num?)?.toDouble(),
+      temp_min: (json['temp_min'] as num?)?.toDouble(),
       pressure: json['pressure'] as int?,
       humidity: json['humidity'] as int?,
     );

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 CustomTheme currentTheme = CustomTheme();
 const Color gbackgroundColor =  Color(0xff22252A);
 class CustomTheme with ChangeNotifier {
-  static bool _isDarkTheme = false;
-  ThemeMode get currentTheme => _isDarkTheme ? ThemeMode.dark : ThemeMode.light;
+  static bool isDarkTheme = false;
+  ThemeMode get currentTheme => isDarkTheme ? ThemeMode.dark : ThemeMode.light;
 
   toggleTheme() {
-    _isDarkTheme = !_isDarkTheme;
+    isDarkTheme = !isDarkTheme;
     notifyListeners();
   }
   

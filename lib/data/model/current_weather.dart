@@ -3,13 +3,13 @@ import 'package:weather/data/model/actual_weather.dart';
 
 part 'current_weather.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class CurrentWeather {
     
-    final int? temp ;
-    final int? temp_min;
-    final int? temp_max;
-    final int? feels_like ;
+    final double? temp ;
+    final double? temp_min;
+    final double? temp_max;
+    final double? feels_like ;
     final int? pressure;
     final int? humidity ;
     

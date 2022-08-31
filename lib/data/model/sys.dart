@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'sys.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Sys {
   final int? type;
   final int? id;

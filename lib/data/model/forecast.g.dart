@@ -28,22 +28,22 @@ Forecast _$ForecastFromJson(Map<String, dynamic> json) => Forecast(
       sys: json['sys'] == null
           ? null
           : Sys.fromJson(json['sys'] as Map<String, dynamic>),
-      timezone: json['timezone'] as String?,
+      timezone: json['timezone'] as int?,
       id: json['id'] as int?,
       name: json['name'] as String?,
       cod: json['cod'] as int?,
     );
 
 Map<String, dynamic> _$ForecastToJson(Forecast instance) => <String, dynamic>{
-      'coord': instance.coord,
-      'weather': instance.weather,
+      'coord': instance.coord?.toJson(),
+      'weather': instance.weather?.map((e) => e.toJson()).toList(),
       'base': instance.base,
-      'main': instance.main,
+      'main': instance.main?.toJson(),
       'visibility': instance.visibility,
-      'wind': instance.wind,
-      'clouds': instance.clouds,
+      'wind': instance.wind?.toJson(),
+      'clouds': instance.clouds?.toJson(),
       'dt': instance.dt,
-      'sys': instance.sys,
+      'sys': instance.sys?.toJson(),
       'timezone': instance.timezone,
       'id': instance.id,
       'name': instance.name,

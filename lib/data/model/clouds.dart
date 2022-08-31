@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'clouds.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Clouds {
   final int? all ;
 

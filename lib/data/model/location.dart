@@ -2,14 +2,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'location.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Location {
-  final String? lat ;
-  final String? lng ;
+  final String? latitude ;
+  final String? longitude ;
   
 
 
-  Location({ this.lat, this.lng}); 
+  Location({ this.latitude, this.longitude}); 
 
   /// Connect the generated [_$LocationFromJson] function to the `fromJson`
   /// factory.

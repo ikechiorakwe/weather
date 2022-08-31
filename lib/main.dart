@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:weather/app/pages/home.dart';
+import 'package:weather/data/model/city_entry.dart';
+import 'package:weather/data/model/forecast_view_model.dart';
 import 'package:weather/themes.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<CityEntryViewModel>(
+            create: (_) => CityEntryViewModel()),
+        ChangeNotifierProvider<ForecastViewModel>(
+            create: (_) => ForecastViewModel()),
+      ], 
+      child: const MyApp()
+    ));
 }
-
 
 class MyApp extends StatefulWidget {
   const MyApp({ Key? key }) : super(key: key);

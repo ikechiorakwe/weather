@@ -4,10 +4,10 @@ import 'package:weather/data/model/current_weather.dart';
 
 part 'coordinate.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Coordinate {
-  final String? lat ;
-  final String? lng ;
+  final double? lat;
+  final double? lng;
   
 
 

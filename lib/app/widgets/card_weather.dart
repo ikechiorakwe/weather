@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather/data/model/forecast_view_model.dart';
 
 class MyCardDisplay extends StatefulWidget {
   const MyCardDisplay({ Key? key }) : super(key: key);
@@ -11,57 +13,62 @@ class _MyCardDisplayState extends State<MyCardDisplay> {
   @override
   Widget build(BuildContext context) {
   var baseSize = MediaQuery.of(context).size.width * 0.04;
-    return  Card(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: baseSize, horizontal: baseSize),
-        child: Column(
-          children: [
-            Row(
-              children:const [
-                MyExpanded(
-                  "3", 
-                  "UV 1", 
-                  "assets/images/UV 1.png"
+    return  Consumer<ForecastViewModel>(
+      builder: (context, model, child) {
+        print("get model: ${model.visibility}");
+        return Card(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: baseSize, horizontal: baseSize),
+            child: Column(
+              children: [
+                Row(
+                  children:[
+                    MyExpanded(
+                      model.visibility ?? 9, 
+                      "UV", 
+                      "assets/images/UV 1.png"
+                    ),
+                     MyExpanded(
+                      model.visibility ?? 9, 
+                      "Visibility", 
+                      "assets/images/VISIBILITY 1.png"
+                    ),
+                    MyExpanded(
+                      model.main?.humidity ?? 9, 
+                      "Humidity", 
+                      "assets/images/HUMIDITY 1.png"
+                    )
+                  ],
                 ),
-                MyExpanded(
-                  "4 km ", 
-                  "Visibility", 
-                  "assets/images/VISIBILITY 1.png"
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: baseSize/2),
+                  child:  Divider(thickness: 1.0, color: Theme.of(context).backgroundColor),
                 ),
-                MyExpanded(
-                  "71", 
-                  "Humidity", 
-                  "assets/images/HUMIDITY 1.png"
-                )
+                Row(
+                  children: [
+                    MyExpanded(
+                      model.wind?.speed?.toInt() ?? 9, 
+                      "Wind", 
+                      "assets/images/WIND 1.png"
+                    ),
+                    MyExpanded(
+                      model.main?.pressure ?? 9, 
+                      "Pressure", 
+                      "assets/images/PRESSURE 1.png"
+                    ),
+                    MyExpanded(
+                      model.wind?.degree ?? 9, 
+                      "Air Quality", 
+                      "assets/images/AIR PRESSURE 1.png"
+                    )
+                  ],
+                ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: baseSize/2),
-              child:  Divider(thickness: 1.0, color: Theme.of(context).backgroundColor),
-            ),
-            Row(
-              children:const [
-                MyExpanded(
-                  "7", 
-                  "Wind", 
-                  "assets/images/WIND 1.png"
-                ),
-                MyExpanded(
-                  "412 mph", 
-                  "Pressure", 
-                  "assets/images/PRESSURE 1.png"
-                ),
-                MyExpanded(
-                  "8 mph", 
-                  "Air Quality", 
-                  "assets/images/AIR PRESSURE 1.png"
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
-      
+          ),
+          
+        );
+      }
     );
   }
 }
@@ -70,7 +77,7 @@ class _MyCardDisplayState extends State<MyCardDisplay> {
 class MyExpanded extends StatelessWidget {
   const MyExpanded(this.firstText, this.secondText, this.imageString,{ Key? key }) : super(key: key);
 
-  final String firstText;
+  final int firstText;
   final String secondText;
   final String imageString;
   @override
@@ -80,7 +87,7 @@ class MyExpanded extends StatelessWidget {
       child: Column(
         children:  [
           Image.asset(imageString, color: Colors.orange,),
-          Text(firstText, style: textTheme.caption,),
+          Text(firstText.toString() , style: textTheme.caption,),
           Text(secondText, style: textTheme.caption,)
         ],
       )

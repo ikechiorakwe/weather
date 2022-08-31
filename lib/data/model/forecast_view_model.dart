@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
@@ -18,34 +19,34 @@ class ForecastViewModel with ChangeNotifier {
   bool isWeatherLoaded = false;
   bool isRequestError = false;
 
-  Coordinate? _coord;
+  Coordinate? _coord ;
   List<ActualWeather>? _weather;
-  String? _base;
-  CurrentWeather? _main;  
-  int? _visibility;
-  Wind? _wind;
-  Clouds? _clouds;
+  String? _base ;
+  CurrentWeather? _main ;  
+  int? _visibility ;
+  Wind? _wind ;
+  Clouds? _clouds ;
   int? _dt;
   Sys? _sys;
-  String? _timezone;
+  int? _timezone;
   int? _id;
   String? _name;
   int? _cod;
 
 
-  Coordinate get coord => _coord!;
-  List<ActualWeather> get weather => _weather!;
-  String get base => _base!;
-  CurrentWeather get main => _main!;  
-  int get visibility => _visibility!;
-  Wind get wind => _wind!;
-  Clouds get clouds => _clouds!;
-  int get dt => _dt!;
-  Sys get sys => _sys!;
-  String get timezone => _timezone!;
-  int get id => _id!;
-  String get name => _name!;
-  int get cod => _cod!;
+  Coordinate? get coord => _coord;
+  List<ActualWeather>? get weather => _weather;
+  String? get base => _base;
+  CurrentWeather? get main => _main;  
+  int? get visibility => _visibility;
+  Wind? get wind => _wind;
+  Clouds? get clouds => _clouds;
+  int? get dt => _dt;
+  Sys? get sys => _sys;
+  int? get timezone => _timezone;
+  int? get id => _id;
+  String? get name => _name;
+  int? get cod => _cod;
 
 
 
@@ -56,23 +57,28 @@ class ForecastViewModel with ChangeNotifier {
         ForecastService(OpenWeatherMapWeatherApi());
   }
 
-  Future<Forecast> getLatestWeather(String city) async {
+  Future<Forecast> getLatestWeather(String city, BuildContext context) async {
     setRequestPendingState(true);
-    isRequestError = false;
+    // isRequestError = false;
 
-    Forecast? latest;
+    Forecast latest = Forecast();
     try {
       await Future.delayed(const Duration(seconds: 1), () => {});
 
-      latest = await forecastService!
-          .getWeather(city)
-          .catchError((onError) => isRequestError = true);
-    } catch (e) {
-     isRequestError = true;
+      final lates = await forecastService!
+          .getWeather(city);
+      print("latest: $latest");
+      latest = lates;
+      // print("late: ${await forecastService!
+      //     .getWeather(city).toString()}");
+
+    } catch (e) {     
+    //  isRequestError = true;
+     debugPrint("requestError: $e");
     }
 
-    isWeatherLoaded = true;
-    updateModel(latest!, city);
+    // isWeatherLoaded = true;
+    updateModel(latest);
     setRequestPendingState(false);
     notifyListeners();
     return latest;
@@ -83,9 +89,9 @@ class ForecastViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateModel(Forecast forecast, String city) {
-    if (isRequestError) return;
-
+  void updateModel(Forecast forecast) {
+    print("forecast.to: ${forecast.toJson()}");
+    // if (isRequestError) return;
     _coord = forecast.coord;
     _weather = forecast.weather;
     _base = forecast.base;
@@ -100,10 +106,8 @@ class ForecastViewModel with ChangeNotifier {
     _name = forecast.name;
     _cod = forecast.cod;
 
+    print("_coord: $_coord");
 
-
-
-
-    
   }
+
 }
